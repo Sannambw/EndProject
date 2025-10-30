@@ -1,33 +1,45 @@
-<!doctype html>
-<html class="no-js" lang="">
-
+<!-- <!DOCTYPE html> talar om för webbläsaren att detta är en HTML5-sida.
+<html lang="sv"> markerar att sidan är skriven på svenska. -->
+<html lang="sv">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <link rel="stylesheet" href="css/style.css">
-  <meta name="description" content="">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎬 Filmguiden</title>
 
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-  <meta property="og:image:alt" content="">
-
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icon.png">
-
-  <link rel="manifest" href="site.webmanifest">
-  <meta name="theme-color" content="#fafafa">
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 
+<!-- Body:n innehåller allt synligt innehåll som syns på webbplatsen -->
 <body>
 
-  <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
-  <script src="js/app.js"></script>
+<!-- HEADER: översta delen på sidan med titel och genreknappar -->
+<header>
+  <h1>🎬 Filmguiden</h1>
+  <p>Välj en genre för att visa filmer</p>
 
+  <!-- Här har jag lagt till en navigeringsmeny för att visa att jag förstår hur man kan skapa interaktiva menyer i HTML.
+ Inuti finns fyra knappar som representerar olika filmgenrer.
+ Knapparna använder attributet data-genre så att JavaScript kan veta vilken genre som ska hämtas när användaren klickar.
+ Jag har också lagt till en klass (genre-meny) för att kunna styla menyn och knapparna i CSS. -->
+  <nav class="genre-meny">
+    <button data-genre="all">Alla filmer</button>
+    <button data-genre="drama">Drama</button>
+    <button data-genre="comedy">Komedi</button>
+    <button data-genre="animation">Animerat</button>
+  </nav>
+</header>
+
+<!-- Här skriver JavaScript in filmkorten dynamiskt -->
+<main id="resultat"></main>
+
+<!-- Längst ner på min sida valde jag att lägga till en sidfot,
+med mitt namn, klass och skola.-->
+
+<footer>
+  <p>© 2025 Sanna Bergmark Wiberg – DAN25S, Medieinstitutet</p>
+</footer>
+
+<!-- Här länkas JavaScript-filen som gör sidan interaktiv -->
+<script src="js/app.js" defer></script>
 </body>
-
 </html>

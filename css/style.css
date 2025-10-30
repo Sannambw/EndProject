@@ -1,247 +1,98 @@
-/*! HTML5 Boilerplate v9.0.1 | MIT License | https://html5boilerplate.com/ */
+/* CSS för Assignment 1
+   Denna fil styr utseendet på sidan:
+   - Textstorlek och färger
+   - Layout av header, main och footer
+   - Knapp och låtlista */
+/* Grund inställningar för hela hemsidan */
+body {
+  font-family: Arial, sans-serif; /* Val av text stil */
+  background: #181818; /* Bakgrundsfärg på hela sidan */
+  color: white; /* Grundfärgen på texten på hela sidan */
+  text-align: center;/* Att alla text är centrerad */
 
-/* main.css 3.0.0 | MIT License | https://github.com/h5bp/main.css#readme */
-/*
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- */
-
-/* ==========================================================================
-   Base styles: opinionated defaults
-   ========================================================================== */
-
-html {
-  color: #222;
-  font-size: 1em;
-  line-height: 1.4;
 }
 
-/*
- * Remove text-shadow in selection highlight:
- * https://twitter.com/miketaylr/status/12228805301
- *
- * Customize the background color to match your design.
- */
-
-::-moz-selection {
-  background: #b3d4fc;
-  text-shadow: none;
+/* Här bestämmer jag både färg på header.Men även avståndet ovan och under */
+header {
+  background: #202020; /* Färg på bakgrundsbilden */
+  padding: 20px; /* Luft runt texten */
 }
 
-::selection {
-  background: #b3d4fc;
-  text-shadow: none;
+/* Rubrikens stil */
+h1 {
+  margin: 0 0 15px; /* Här bestämmer jag mellanrummet mellan huvudrubriken och paragraftexen */
+  font-size: 35px; /* Textstorlek på huvudrubriken */
 }
 
-/*
- * A better looking default horizontal rule
- */
-
-hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
-  margin: 1em 0;
-  padding: 0;
+/* Liten text under rubriken */
+header p {
+  margin: 0 0 15px; /* Här bestämmer jag mellanrummet mellan paragraftexten och knapparna*/
+  color: gray /* Vilken färg det ska vara på texten */
 }
 
-/*
- * Remove the gap between audio, canvas, iframes,
- * images, videos and the bottom of their containers:
- * https://github.com/h5bp/html5-boilerplate/issues/440
- */
-
-audio,
-canvas,
-iframe,
-img,
-svg,
-video {
-  vertical-align: middle;
+/* === GENRE-KNAPPAR === */
+/* Här styr jag hur knapparna i genremenyn ska se ut.
+   Jag har valt en mörkgrå bakgrund (#4a4a4a) med vit text för bra kontrast.
+   Rundade hörn och mellanrum gör dem mer enhetliga och tydliga */
+.genre-meny button {
+  background-color: #4a4a4a; /* Bakgrundsfärg på knappen */
+  color: white;/* Vit text för bra läsbarhet */
+  padding: 5px 15px; /* Storlek på knappen */
+  margin: 3px;/* Litet mellanrum mellan knapparna */
+  cursor: pointer; /* Handikon vid hover */
+  transition: all 0.3s ease; /* Gör färgändring mjuk vid hover */
 }
 
-/*
- * Remove default fieldset styles.
- */
-
-fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
+/* När musen hålls över knappen. */
+.genre-meny button:hover {
+  background-color: #6b6b6b; /* Lite ljusare grå vid hover */
+  transform: scale(1.05);    /* Gör att knappen växer lite när man håller över */
+}
+/* Här styr jag utseendet på rubriken som visas för varje genre.
+ Den används för att visa vilken kategori av filmer som laddats in,
+ till exempel Drama eller Komedi */
+h2 {
+  margin: 32px 0 16px; /* Bildar ett mellanrum mellan den nya texten och knapparna */
+  font-size: 25px;/* Textstorlek på H2 rubriken */
+  text-transform: uppercase;/* Gör texten till versaler */
 }
 
-/*
- * Allow only vertical resizing of textareas.
- */
-
-textarea {
-  resize: vertical;
+/* GRID: VISAR FILMER I TRE KOLUMNER */
+.genre-row {
+  display: grid; /* Aktiverar grid-layout, vilket gör att filmerna placeras i ett rutnät */
+  grid-template-columns: repeat(4, 1fr); /* Skapar tre lika breda kolumner — alltså fyra filmer per rad */
+  gap: 20px; /* Bestämmer mellanrummet mellan varje filmkort i rutnätet */
+  width: 90%; /* Gör att rutnätet tar upp 90% av skärmens bredd, med lite luft på sidorna */
+  max-width: 950px; /* Gör så att rutnätet inte blir bredare än 900px även på stora skärmar */
+  margin: 0 auto 40px; /* Centrerar rutnätet på sidan och lägger till 40px luft under */
 }
 
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-
-/* ==========================================================================
-   Helper classes
-   ========================================================================== */
-
-/*
- * Hide visually and from screen readers
- */
-
-.hidden,
-[hidden] {
-  display: none !important;
+/* FILMKORT*/
+.card {
+  background: #222; /* Färg på kortets bakgrund där texten står. Så att det passar temat */
+  transition: transform 0.25s, background 0.25s; /* Gör att färg och storlek ändras mjukt vid hover */
 }
 
-/*
- * Hide only visually, but have it available for screen readers:
- * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
- *
- * 1. For long content, line feeds are not interpreted as spaces and small width
- *    causes content to wrap 1 word per line:
- *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
- */
-
-.visually-hidden {
-  border: 0;
-  clip: rect(0, 0, 0, 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-  /* 1 */
+/* Hover-effekt: förstorar kortet lite */
+.card:hover {
+  transform: scale(1.05); /* Förstorar hela kortet lite när musen hålls över – ger en snygg effekt */
 }
 
-/*
- * Extends the .visually-hidden class to allow the element
- * to be focusable when navigated to via the keyboard:
- * https://www.drupal.org/node/897638
- */
-
-.visually-hidden.focusable:active,
-.visually-hidden.focusable:focus {
-  clip: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  position: static;
-  white-space: inherit;
-  width: auto;
+/* Filmens bild */
+.card img {
+  width: 100%; /* Gör att bilden fyller hela kortets bredd */
+  height: 350px; /* Bestämmer höjden på bilden, så jag kan göra att hela bilden syns */
 }
 
-/*
- * Hide visually and from screen readers, but maintain layout
- */
-
-.invisible {
-  visibility: hidden;
+/* Filmens titel */
+.card h3 {
+  margin: 10px 0;
+  font-size: 16px; /* Storleken på texten under varje film kort */
 }
-
-/*
- * Clearfix: contain floats
- *
- * The use of `table` rather than `block` is only necessary if using
- * `::before` to contain the top-margins of child elements.
- */
-
-.clearfix::before,
-.clearfix::after {
-  content: "";
-  display: table;
+/* Här kommer sidfoten och hur den ska se ut */
+footer {
+  background: #202020; /* Vilken färg bakgrundfärgen */
+  color: white; /* Färgen på texten */
+  padding: 12px; /* Hur bred rutan ska vara */
+  font-size: 14px; /* Storlek på texten */
 }
-
-.clearfix::after {
-  clear: both;
-}
-
-/* ==========================================================================
-   EXAMPLE Media Queries for Responsive Design.
-   These examples override the primary ('mobile first') styles.
-   Modify as content requires.
-   ========================================================================== */
-
-@media only screen and (min-width: 35em) {
-  /* Style adjustments for viewports that meet the condition */
-}
-
-@media print,
-  (-webkit-min-device-pixel-ratio: 1.25),
-  (min-resolution: 1.25dppx),
-  (min-resolution: 120dpi) {
-  /* Style adjustments for high resolution devices */
-}
-
-/* ==========================================================================
-   Print styles.
-   Inlined to avoid the additional HTTP request:
-   https://www.phpied.com/delay-loading-your-print-css/
-   ========================================================================== */
-
-@media print {
-  *,
-  *::before,
-  *::after {
-    background: #fff !important;
-    color: #000 !important;
-    /* Black prints faster */
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
-
-  a[href]::after {
-    content: " (" attr(href) ")";
-  }
-
-  abbr[title]::after {
-    content: " (" attr(title) ")";
-  }
-
-  /*
-   * Don't show links that are fragment identifiers,
-   * or use the `javascript:` pseudo protocol
-   */
-  a[href^="#"]::after,
-  a[href^="javascript:"]::after {
-    content: "";
-  }
-
-  pre {
-    white-space: pre-wrap !important;
-  }
-
-  pre,
-  blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid;
-  }
-
-  tr,
-  img {
-    page-break-inside: avoid;
-  }
-
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3;
-  }
-
-  h2,
-  h3 {
-    page-break-after: avoid;
-  }
-}
-
