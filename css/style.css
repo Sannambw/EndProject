@@ -3,13 +3,13 @@
    - Textstorlek och färger
    - Layout av header, main och footer
    - Knapp och låtlista */
+
 /* Grund inställningar för hela hemsidan */
 body {
   font-family: Arial, sans-serif; /* Val av text stil */
   background: #181818; /* Bakgrundsfärg på hela sidan */
   color: white; /* Grundfärgen på texten på hela sidan */
-  text-align: center;/* Att alla text är centrerad */
-
+  text-align: center; /* Att all text är centrerad */
 }
 
 /* Här bestämmer jag både färg på header.Men även avståndet ovan och under */
@@ -20,56 +20,61 @@ header {
 
 /* Rubrikens stil */
 h1 {
-  margin: 0 0 15px; /* Här bestämmer jag mellanrummet mellan huvudrubriken och paragraftexen */
+  margin: 0 0 15px; /* Här bestämmer jag mellanrummet mellan huvudrubriken och paragraftexten */
   font-size: 35px; /* Textstorlek på huvudrubriken */
 }
 
 /* Liten text under rubriken */
 header p {
-  margin: 0 0 15px; /* Här bestämmer jag mellanrummet mellan paragraftexten och knapparna*/
-  color: gray /* Vilken färg det ska vara på texten */
+  margin: 0 0 15px; /* Här bestämmer jag mellanrummet mellan paragraftexten och knapparna */
+  color: gray; /* Vilken färg det ska vara på texten */
 }
 
-/* === GENRE-KNAPPAR === */
 /* Här styr jag hur knapparna i genremenyn ska se ut.
    Jag har valt en mörkgrå bakgrund (#4a4a4a) med vit text för bra kontrast.
    Rundade hörn och mellanrum gör dem mer enhetliga och tydliga */
 .genre-meny button {
   background-color: #4a4a4a; /* Bakgrundsfärg på knappen */
-  color: white;/* Vit text för bra läsbarhet */
+  color: white; /* Vit text för bra läsbarhet */
   padding: 5px 15px; /* Storlek på knappen */
-  margin: 3px;/* Litet mellanrum mellan knapparna */
+  margin: 3px; /* Litet mellanrum mellan knapparna */
   cursor: pointer; /* Handikon vid hover */
   transition: all 0.3s ease; /* Gör färgändring mjuk vid hover */
+  border: none; /* Tar bort standardram */
+  border-radius: 5px; /* Rundar hörnen lite */
 }
 
 /* När musen hålls över knappen. */
 .genre-meny button:hover {
   background-color: #6b6b6b; /* Lite ljusare grå vid hover */
-  transform: scale(1.05);    /* Gör att knappen växer lite när man håller över */
-}
-/* Här styr jag utseendet på rubriken som visas för varje genre.
- Den används för att visa vilken kategori av filmer som laddats in,
- till exempel Drama eller Komedi */
-h2 {
-  margin: 32px 0 16px; /* Bildar ett mellanrum mellan den nya texten och knapparna */
-  font-size: 25px;/* Textstorlek på H2 rubriken */
-  text-transform: uppercase;/* Gör texten till versaler */
+  transform: scale(1.05); /* Gör att knappen växer lite när man håller över */
 }
 
-/* GRID: VISAR FILMER I TRE KOLUMNER */
-.genre-row {
+/* Här styr jag utseendet på rubriken som visas för varje genre.
+   Den används för att visa vilken kategori av filmer som laddats in,
+   till exempel Drama eller Komedi */
+h2 {
+  margin: 32px 0 16px; /* Bildar ett mellanrum mellan den nya texten och knapparna */
+  font-size: 25px; /* Textstorlek på H2-rubriken */
+  text-transform: uppercase; /* Gör texten till versaler */
+}
+
+/* GRID: VISAR FILMER I FYRA KOLUMNER */
+.genre-row,
+.rad { /* .rad används av JavaScript för att skapa rader automatiskt */
   display: grid; /* Aktiverar grid-layout, vilket gör att filmerna placeras i ett rutnät */
-  grid-template-columns: repeat(4, 1fr); /* Skapar tre lika breda kolumner — alltså fyra filmer per rad */
+  grid-template-columns: repeat(4, 1fr); /* Skapar fyra lika breda kolumner — alltså fyra filmer per rad */
   gap: 20px; /* Bestämmer mellanrummet mellan varje filmkort i rutnätet */
   width: 90%; /* Gör att rutnätet tar upp 90% av skärmens bredd, med lite luft på sidorna */
-  max-width: 950px; /* Gör så att rutnätet inte blir bredare än 900px även på stora skärmar */
+  max-width: 1000px; /* Gör så att rutnätet inte blir för brett även på stora skärmar */
   margin: 0 auto 40px; /* Centrerar rutnätet på sidan och lägger till 40px luft under */
 }
 
-/* FILMKORT*/
+/* FILMKORT */
 .card {
   background: #222; /* Färg på kortets bakgrund där texten står. Så att det passar temat */
+  border-radius: 8px; /* Rundar hörnen lite */
+  overflow: hidden; /* Gör så att bilden håller sig inom kortets form */
   transition: transform 0.25s, background 0.25s; /* Gör att färg och storlek ändras mjukt vid hover */
 }
 
@@ -81,18 +86,21 @@ h2 {
 /* Filmens bild */
 .card img {
   width: 100%; /* Gör att bilden fyller hela kortets bredd */
-  height: 350px; /* Bestämmer höjden på bilden, så jag kan göra att hela bilden syns */
+  height: 300px; /* Bestämmer höjden på bilden, så att bilderna blir jämna i storlek */
+  object-fit: cover; /* Gör att bilder beskärs snyggt utan att bli utdragna */
 }
 
 /* Filmens titel */
 .card h3 {
   margin: 10px 0;
-  font-size: 16px; /* Storleken på texten under varje film kort */
+  font-size: 16px; /* Storleken på texten under varje filmkort */
 }
+
 /* Här kommer sidfoten och hur den ska se ut */
 footer {
-  background: #202020; /* Vilken färg bakgrundfärgen */
+  background: #202020; /* Vilken färg bakgrundsfärgen */
   color: white; /* Färgen på texten */
   padding: 12px; /* Hur bred rutan ska vara */
   font-size: 14px; /* Storlek på texten */
 }
+

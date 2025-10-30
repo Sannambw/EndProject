@@ -1,55 +1,95 @@
-// === Filmguiden – Slutprojekt av Sanna Bergmark Wiberg ===
-// Hämtar filmer från SampleAPIs och visar dem på sidan
-
-// Lista över genrer
+/* En lista med de filmgenrer som används i menyn */
 const genrer = ["drama", "comedy", "animation"];
 
-// Funktion som hämtar filmer beroende på vald genre
+/* Här sparas alla filmer som hämtas från API:et */
+let allaFilmer = [];
+
+/* Funktionen hämtar filmer från API:et.
+Datan laddas från webbsidan och visar antingen alla genrer
+eller bara den specifika genre man väljer */
 async function hamtaFilmer(genre) {
   const resultat = document.getElementById("resultat");
+  resultat.innerHTML = "<p>Laddar filmer...</p>"; /* Tillfällig text medan filmer hämtas */
   let filmer = [];
 
-  // Om man valt "Alla filmer" hämtas alla genrer
+  /* Om man väljer “Alla filmer” hämtas alla tre genrer (drama, comedy och animation) */
   if (genre === "all") {
     for (let g of genrer) {
+      /* Hämtar filmer för varje genre i listan */
       const res = await fetch(`https://api.sampleapis.com/movies/${g}`);
       const data = await res.json();
-      filmer = filmer.concat(data); // Lägger ihop alla filmer
+      filmer = filmer.concat(data); /* Lägger ihop filmerna till en stor lista */
     }
   } else {
-    // Hämtar bara filmer från en genre
+    /* Hämtar filmer bara från den valda genren */
     const res = await fetch(`https://api.sampleapis.com/movies/${genre}`);
     filmer = await res.json();
   }
-  // Visar bara de 12 första filmerna
-  const visa = filmer.slice(0, 12);
 
-  // Bestämmer rubriken beroende på genre
-  let rubrik = "Alla filmer";
-  if (genre === "drama") rubrik = "Drama";
-  if (genre === "comedy") rubrik = "Komedi";
-  if (genre === "animation") rubrik = "Animerat";
+  /* Sparar resultatet i allaFilmer (så det kan visas senare) */
+  allaFilmer = filmer;
 
-  // Skriver ut filmerna på sidan
-  resultat.innerHTML = `
-    <h2>${rubrik}</h2>
-    <div class="genre-row">
-      ${visa.map(film => `
-        <div class="card">
-          <img src="${film.posterURL || "https://via.placeholder.com/200x300?text=Ingen+bild"}">
-          <h3>${film.title}</h3>
-        </div>
-      `).join("")}
-    </div>
-  `;
+  /* Kör funktionen som visar filmerna på sidan */
+  visaFilmer(genre);
 }
 
-// Gör så att knapparna fungerar
+/* Funktion för att visa filmer på webbsidan
+   - Visar filmens titel och bild
+   - Sätter rubrik beroende på vald genre
+   - Visar filmerna i rader med 4 kort per rad */
+function visaFilmer(genre) {
+  const resultat = document.getElementById("resultat");
+  resultat.innerHTML = ""; /* Tömmer innehållet innan nya filmer visas */
+
+  /* Bestämmer vilken rubrik som ska stå på sidan */
+  let rubrik = "";
+  if (genre === "all") rubrik = "Alla filmer";
+  else if (genre === "drama") rubrik = "Drama";
+  else if (genre === "comedy") rubrik = "Komedi";
+  else if (genre === "animation") rubrik = "Animerat";
+
+  /* Skapar rubriken och visar den på sidan */
+  const titel = document.createElement("h2");
+  titel.textContent = rubrik;
+  resultat.appendChild(titel);
+
+  /* Skapar rader med 4 filmer i varje rad */
+  let rad;
+  allaFilmer.forEach((film, index) => {
+    /* Startar en ny rad var fjärde film */
+    if (index % 4 === 0) {
+      rad = document.createElement("div");
+      rad.classList.add("rad"); /* Klass för raderna */
+      resultat.appendChild(rad);
+    }
+
+    /* Skapar ett kort för varje film med bild och titel */
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    const img = document.createElement("img");
+    img.src = film.posterURL || "https://via.placeholder.com/200x300?text=Ingen+bild";
+
+    const namn = document.createElement("h3");
+    namn.textContent = film.title;
+
+    /* Lägger till bild och titel i filmkortet */
+    card.appendChild(img);
+    card.appendChild(namn);
+
+    /* Lägger till filmkortet i den aktuella raden */
+    rad.appendChild(card);
+  });
+}
+
+/* Lyssnar på alla knappar i menyn.
+När man klickar på en knapp (t.ex. “Drama”)
+hämtas filmer från den specifika genren */
 document.querySelectorAll(".genre-meny button").forEach(knapp => {
   knapp.addEventListener("click", () => {
     hamtaFilmer(knapp.dataset.genre);
   });
 });
 
-// Visar alla filmer direkt när sidan öppnas
+/* När sidan laddas första gången, hämtar och visar alla filmer automatiskt */
 hamtaFilmer("all");
